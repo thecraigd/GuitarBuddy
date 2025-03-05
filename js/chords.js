@@ -199,45 +199,8 @@ class ChordLibrary {
     const guitarDiagram = document.createElement('div');
     guitarDiagram.className = 'guitar-diagram';
     
-    // Create open/muted string indicators container
-    const openStringIndicators = document.createElement('div');
-    openStringIndicators.className = 'open-string-indicators';
-    openStringIndicators.style.display = 'flex';
-    openStringIndicators.style.justifyContent = 'space-around';
-    openStringIndicators.style.width = '100%';
-    openStringIndicators.style.marginBottom = '5px';
-    
-    // Add open/muted indicators for each string
+    // Get the positions for the strings
     const positions = chordInfo.positions;
-    
-    // Add each string indicator
-    for (let i = 5; i >= 0; i--) {
-      const indicator = document.createElement('div');
-      indicator.style.width = '24px';
-      indicator.style.height = '24px';
-      indicator.style.borderRadius = '50%';
-      indicator.style.display = 'flex';
-      indicator.style.alignItems = 'center';
-      indicator.style.justifyContent = 'center';
-      indicator.style.fontWeight = 'bold';
-      
-      if (positions[i] === 'X') {
-        // Muted string
-        indicator.textContent = 'X';
-        indicator.style.color = '#e74c3c';  // Red for muted
-      } else if (positions[i] === '0') {
-        // Open string
-        indicator.textContent = 'O';
-        indicator.style.color = '#2ecc71';  // Green for open
-      } else {
-        // Fretted string - empty indicator
-        indicator.textContent = '';
-      }
-      
-      openStringIndicators.appendChild(indicator);
-    }
-    
-    guitarDiagram.appendChild(openStringIndicators);
     
     // Create fretboard
     const fretboard = document.createElement('div');
@@ -281,15 +244,48 @@ class ChordLibrary {
       // String names (from highest to lowest pitched)
       const stringNames = ['e', 'B', 'G', 'D', 'A', 'E'];
       
-      // Add string identifier
+      // Create a container for string identifier and open/muted indicator
+      const stringInfoContainer = document.createElement('div');
+      stringInfoContainer.className = 'string-info-container';
+      stringInfoContainer.style.display = 'flex';
+      stringInfoContainer.style.flexDirection = 'column';
+      stringInfoContainer.style.alignItems = 'center';
+      stringInfoContainer.style.justifyContent = 'center';
+      stringInfoContainer.style.width = '30px';
+      stringInfoContainer.style.borderRight = '2px solid #000'; /* Nut border */
+      stringInfoContainer.style.backgroundColor = '#f9f9f9';
+      
+      // Add string identifier (E, A, D, etc.)
       const stringIdentifier = document.createElement('div');
       stringIdentifier.className = 'string-identifier';
-      stringIdentifier.style.width = '20px';
-      stringIdentifier.style.textAlign = 'center';
-      stringIdentifier.style.fontSize = '12px';
+      stringIdentifier.style.fontSize = '10px';
       stringIdentifier.style.color = '#888';
+      stringIdentifier.style.marginBottom = '2px';
       stringIdentifier.textContent = stringNames[5 - i];
-      stringDiv.appendChild(stringIdentifier);
+      
+      // Add open/muted string indicator
+      const indicator = document.createElement('div');
+      indicator.className = 'open-string-indicator';
+      indicator.style.fontWeight = 'bold';
+      indicator.style.fontSize = '14px';
+      
+      if (positions[i] === 'X') {
+        // Muted string
+        indicator.textContent = 'X';
+        indicator.style.color = '#e74c3c';  // Red for muted
+      } else if (positions[i] === '0') {
+        // Open string
+        indicator.textContent = 'O';
+        indicator.style.color = '#2ecc71';  // Green for open
+      } else {
+        // Fretted string - just show a small dash
+        indicator.textContent = '-';
+        indicator.style.color = '#aaa';
+      }
+      
+      stringInfoContainer.appendChild(stringIdentifier);
+      stringInfoContainer.appendChild(indicator);
+      stringDiv.appendChild(stringInfoContainer);
       
       // Create frets
       for (let j = 0; j < 4; j++) {  // Reduced to 4 frets for better display
@@ -330,7 +326,7 @@ class ChordLibrary {
     // Add string identifier column
     const stringIdMarker = document.createElement('div');
     stringIdMarker.className = 'fret-marker';
-    stringIdMarker.style.width = '20px';  // Match width of string identifier
+    stringIdMarker.style.width = '30px';  // Match width of string info container
     fretMarkers.appendChild(stringIdMarker);
     
     // Add actual fret numbers
