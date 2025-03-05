@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuitarBuddy</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>GuitarBuddy</h1>
+            <nav id="main-nav">
+                <button class="nav-btn active" data-target="tuner">Tuner</button>
+                <button class="nav-btn" data-target="metronome">Metronome</button>
+                <button class="nav-btn" data-target="chords">Chords</button>
+                <button class="nav-btn" data-target="scales">Scales</button>
+            </nav>
+        </header>
+
+        <main>
+            <section id="tuner" class="tool-section active">
+                <h2>Guitar Tuner</h2>
+                <div class="tuner-display">
+                    <div class="note-display">--</div>
+                    <div class="frequency-display">0 Hz</div>
+                    <div class="tuning-indicator">
+                        <div class="indicator-bar"></div>
+                    </div>
+                </div>
+                <div class="string-buttons">
+                    <button class="string-btn" data-note="E" data-freq="82.41">E (Low)</button>
+                    <button class="string-btn" data-note="A" data-freq="110.00">A</button>
+                    <button class="string-btn" data-note="D" data-freq="146.83">D</button>
+                    <button class="string-btn" data-note="G" data-freq="196.00">G</button>
+                    <button class="string-btn" data-note="B" data-freq="246.94">B</button>
+                    <button class="string-btn" data-note="E" data-freq="329.63">E (High)</button>
+                </div>
+                <button id="start-tuner" class="action-btn">Start Listening</button>
+                
+                <!-- Direct test buttons for tuner -->
+                <div style="margin-top: 20px; padding: 10px; border: 1px dashed #ccc; border-radius: 8px;">
+                    <h3>Debug Controls</h3>
+                    <button id="tuner-test-sound" class="action-btn" style="margin: 5px; width: auto; padding: 8px 16px;">Test Sound</button>
+                    <div id="tuner-status" style="margin-top: 10px; padding: 8px; background-color: #f5f5f5; border-radius: 4px;">Tuner status: Not initialized</div>
+                </div>
+            </section>
+
+            <section id="metronome" class="tool-section">
+                <h2>Metronome</h2>
+                <div class="metronome-display">
+                    <div class="tempo-display">120 BPM</div>
+                    <div class="time-signature">
+                        <select id="beats-per-measure">
+                            <option value="2">2/4</option>
+                            <option value="3">3/4</option>
+                            <option value="4" selected>4/4</option>
+                            <option value="5">5/4</option>
+                            <option value="6">6/8</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="range" id="tempo-slider" min="40" max="220" value="120" step="1">
+                <div class="metronome-controls">
+                    <button id="tempo-down" class="tempo-btn">-</button>
+                    <button id="start-metronome" class="action-btn">Start</button>
+                    <button id="tempo-up" class="tempo-btn">+</button>
+                </div>
+                
+                <!-- Direct test buttons for metronome -->
+                <div style="margin-top: 20px; padding: 10px; border: 1px dashed #ccc; border-radius: 8px;">
+                    <h3>Debug Controls</h3>
+                    <button id="metronome-test-sound" class="action-btn" style="margin: 5px; width: auto; padding: 8px 16px;">Test Click</button>
+                    <div id="metronome-status" style="margin-top: 10px; padding: 8px; background-color: #f5f5f5; border-radius: 4px;">Metronome status: Not initialized</div>
+                </div>
+            </section>
+
+            <section id="chords" class="tool-section">
+                <h2>Chord Library</h2>
+                <div class="chord-selector">
+                    <select id="chord-root">
+                        <option value="C">C</option>
+                        <option value="C#">C#/Db</option>
+                        <option value="D">D</option>
+                        <option value="D#">D#/Eb</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="F#">F#/Gb</option>
+                        <option value="G">G</option>
+                        <option value="G#">G#/Ab</option>
+                        <option value="A">A</option>
+                        <option value="A#">A#/Bb</option>
+                        <option value="B">B</option>
+                    </select>
+                    <select id="chord-type">
+                        <option value="major">Major</option>
+                        <option value="minor">Minor</option>
+                        <option value="7">7</option>
+                        <option value="maj7">Maj7</option>
+                        <option value="min7">Min7</option>
+                        <option value="sus2">Sus2</option>
+                        <option value="sus4">Sus4</option>
+                        <option value="dim">Dim</option>
+                        <option value="aug">Aug</option>
+                    </select>
+                    <button id="update-chord" class="action-btn" style="margin-top: 10px; width: auto; padding: 8px 16px;">Update Chord</button>
+                </div>
+                <div class="chord-diagram">
+                    <!-- Chord diagram will be rendered here -->
+                </div>
+                <div class="debug-info" style="margin-top: 10px; font-size: 12px; color: #777; display: none;">
+                    <strong>Debug Info:</strong>
+                    <pre id="chord-debug"></pre>
+                </div>
+            </section>
+
+            <section id="scales" class="tool-section">
+                <h2>Scale Library</h2>
+                <div class="scale-selector">
+                    <select id="scale-root">
+                        <option value="C">C</option>
+                        <option value="C#">C#/Db</option>
+                        <option value="D">D</option>
+                        <option value="D#">D#/Eb</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="F#">F#/Gb</option>
+                        <option value="G">G</option>
+                        <option value="G#">G#/Ab</option>
+                        <option value="A">A</option>
+                        <option value="A#">A#/Bb</option>
+                        <option value="B">B</option>
+                    </select>
+                    <select id="scale-type">
+                        <option value="major">Major</option>
+                        <option value="minor">Minor (Natural)</option>
+                        <option value="harmonic_minor">Harmonic Minor</option>
+                        <option value="melodic_minor">Melodic Minor</option>
+                        <option value="pentatonic_major">Pentatonic Major</option>
+                        <option value="pentatonic_minor">Pentatonic Minor</option>
+                        <option value="blues">Blues</option>
+                        <option value="dorian">Dorian</option>
+                        <option value="phrygian">Phrygian</option>
+                        <option value="lydian">Lydian</option>
+                        <option value="mixolydian">Mixolydian</option>
+                        <option value="locrian">Locrian</option>
+                    </select>
+                    <button id="update-scale" class="action-btn" style="margin-top: 10px; width: auto; padding: 8px 16px;">Update Scale</button>
+                </div>
+                <div class="scale-diagram">
+                    <!-- Scale diagram will be rendered here -->
+                </div>
+                <div class="debug-info" style="margin-top: 10px; font-size: 12px; color: #777; display: none;">
+                    <strong>Debug Info:</strong>
+                    <pre id="scale-debug"></pre>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>GuitarBuddy - A helpful tool for musicians</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js" type="module"></script>
+    <script>
+      // Initialize debug container
+      window.debugElements = {};
+      
+      // Modify page for debug tools
+      document.addEventListener('DOMContentLoaded', () => {
+        // Add direct test button handlers
+        const tunerTestBtn = document.getElementById('tuner-test-sound');
+        const metronomeTestBtn = document.getElementById('metronome-test-sound');
+        const tunerStatus = document.getElementById('tuner-status');
+        const metronomeStatus = document.getElementById('metronome-status');
+        
+        // Initialize status indicators
+        if (tunerStatus) {
+          tunerStatus.textContent = 'Tuner initializing... Click test sound button if needed';
+          tunerStatus.style.backgroundColor = '#ffffdd';
+        }
+        
+        if (metronomeStatus) {
+          metronomeStatus.textContent = 'Metronome initializing... Click test click button if needed';
+          metronomeStatus.style.backgroundColor = '#ffffdd';
+        }
+        
+        if (tunerTestBtn) {
+          tunerTestBtn.addEventListener('click', () => {
+            console.log('Direct tuner test button clicked');
+            try {
+              // Create a simple test tone
+              const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+              const oscillator = audioCtx.createOscillator();
+              const gainNode = audioCtx.createGain();
+              
+              oscillator.type = 'sine';
+              oscillator.frequency.value = 440;
+              
+              gainNode.gain.value = 0.5;
+              
+              oscillator.connect(gainNode);
+              gainNode.connect(audioCtx.destination);
+              
+              oscillator.start();
+              oscillator.stop(audioCtx.currentTime + 0.5);
+              
+              if (tunerStatus) {
+                tunerStatus.textContent = 'Tuner test: Sound played at 440Hz';
+                tunerStatus.style.backgroundColor = '#d4ffda';
+              }
+              
+              console.log('Test tone played successfully');
+            } catch (error) {
+              console.error('Error playing test tone:', error);
+              if (tunerStatus) {
+                tunerStatus.textContent = 'ERROR: ' + error.message;
+                tunerStatus.style.backgroundColor = '#ffd4d4';
+              }
+            }
+          });
+        }
+        
+        if (metronomeTestBtn) {
+          metronomeTestBtn.addEventListener('click', () => {
+            console.log('Direct metronome test button clicked');
+            try {
+              // Create a simple metronome click
+              const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+              const oscillator = audioCtx.createOscillator();
+              const gainNode = audioCtx.createGain();
+              
+              oscillator.frequency.value = 800;
+              
+              gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+              gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.01);
+              gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1);
+              
+              oscillator.connect(gainNode);
+              gainNode.connect(audioCtx.destination);
+              
+              oscillator.start();
+              oscillator.stop(audioCtx.currentTime + 0.1);
+              
+              if (metronomeStatus) {
+                metronomeStatus.textContent = 'Metronome test: Click sound played';
+                metronomeStatus.style.backgroundColor = '#d4ffda';
+              }
+              
+              console.log('Metronome click played successfully');
+            } catch (error) {
+              console.error('Error playing metronome click:', error);
+              if (metronomeStatus) {
+                metronomeStatus.textContent = 'ERROR: ' + error.message;
+                metronomeStatus.style.backgroundColor = '#ffd4d4';
+              }
+            }
+          });
+        }
+        // Display browser info
+        const debugInfo = document.createElement('div');
+        debugInfo.style.padding = '10px';
+        debugInfo.style.margin = '10px';
+        debugInfo.style.backgroundColor = '#eee';
+        debugInfo.style.borderRadius = '4px';
+        debugInfo.style.fontSize = '12px';
+        
+        const userAgent = navigator.userAgent;
+        const audioContextSupport = window.AudioContext || window.webkitAudioContext ? 'Yes' : 'No';
+        const getUserMediaSupport = navigator.mediaDevices && navigator.mediaDevices.getUserMedia ? 'Yes' : 'No';
+        
+        debugInfo.innerHTML = `
+          <h3>Browser Information</h3>
+          <p><strong>User Agent:</strong> ${userAgent}</p>
+          <p><strong>AudioContext Support:</strong> ${audioContextSupport}</p>
+          <p><strong>getUserMedia Support:</strong> ${getUserMediaSupport}</p>
+        `;
+        
+        // Insert at the top of the app container
+        const appContainer = document.querySelector('.app-container');
+        if (appContainer) {
+          appContainer.insertBefore(debugInfo, appContainer.firstChild);
+        }
+        
+        // Do not force all sections visible by default
+        // This code was causing navigation to break
+      });
+    </script>
+</body>
+</html>

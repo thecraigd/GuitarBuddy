@@ -1,0 +1,16 @@
+{
+  "name": "GuitarBuddy",
+  "short_name": "GuitarBuddy",
+  "description": "Essential tools for guitarists and musicians",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#3498db",
+  "theme_color": "#3498db",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

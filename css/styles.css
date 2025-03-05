@@ -1,0 +1,489 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --dark-color: #2c3e50;
+  --light-color: #ecf0f1;
+  --background-color: #f9f9f9;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+.app-container {
+  max-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+footer {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Navigation */
+#main-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  font-size: 0.9rem;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn.active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Tool Sections */
+.tool-section {
+  display: none; /* Default state is hidden */
+  margin-top: 1rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+/* Active section is visible - JavaScript will manage this */
+.tool-section.active {
+  display: block !important; /* Use !important to override any inline styles */
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+/* Tuner */
+.tuner-display {
+  background-color: var(--light-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.note-display {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frequency-display {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.tuning-indicator {
+  height: 8px;
+  background-color: #ddd;
+  border-radius: 4px;
+  margin: 0 auto;
+  position: relative;
+  width: 80%;
+}
+
+.indicator-bar {
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  background-color: var(--accent-color);
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: left 0.2s;
+}
+
+.string-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.string-btn {
+  padding: 1rem 0.5rem;
+  background-color: var(--light-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.string-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.action-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Metronome */
+.metronome-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tempo-display {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.time-signature select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+#tempo-slider {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  height: 8px;
+}
+
+.metronome-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.tempo-btn {
+  padding: 1rem;
+  background-color: var(--light-color);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  flex: 1;
+  width: 20%;
+}
+
+#start-metronome {
+  flex: 3;
+  width: 60%;
+}
+
+/* Chord and Scale Library */
+.chord-selector, .scale-selector {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.chord-selector select, .scale-selector select {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.chord-diagram, .scale-diagram {
+  background-color: var(--light-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Special styles for scale diagram */
+.scale-diagram .diagram-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.scale-diagram .fretboard {
+  width: fit-content;
+}
+
+.scale-diagram .fret {
+  min-width: 30px;
+  width: 30px;
+}
+
+.scale-diagram .finger-marker {
+  font-size: 10px;
+  width: 22px;
+  height: 22px;
+}
+
+.scale-diagram .scale-notes {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.scale-diagram .scale-explanation {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #666;
+}
+
+/* Mobile optimizations */
+@media (max-width: 600px) {
+  header {
+    padding: 0.75rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .nav-btn {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8rem;
+  }
+  
+  .tool-section {
+    padding: 1rem;
+  }
+  
+  .note-display {
+    font-size: 3rem;
+  }
+  
+  .string-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .metronome-display {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .chord-selector, .scale-selector {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Guitar diagram related styles */
+.guitar-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fretboard {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  border: 1px solid #888;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 240px; /* Ensure minimum width */
+  width: fit-content;
+}
+
+.guitar-string {
+  display: flex;
+  height: 30px;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+}
+
+.guitar-string:last-child {
+  border-bottom: none;
+}
+
+.fret {
+  width: 40px;
+  height: 100%;
+  border-right: 2px solid #888;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.string-line {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #999;
+  z-index: 1;
+}
+
+.finger-marker {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.string-identifier {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #000; /* Nut border */
+  background-color: #f9f9f9;
+}
+
+/* Open/muted string indicators */
+.open-string-indicators {
+  margin-bottom: 5px;
+}
+
+.open-string-indicator {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.fret-markers {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.5rem;
+}
+
+.fret-marker {
+  width: 40px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Special chord diagram styles */
+.chord-diagram .fretboard {
+  border-top: 4px solid #000; /* Thick line for the nut */
+}
+
+.chord-diagram .finger-legend {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.chord-diagram .fret-number-indicator {
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  font-size: 12px;
+  padding: 2px 5px;
+  background-color: #fff;
+  border: 1px solid #888;
+  border-radius: 4px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a1a;
+    --dark-color: #e0e0e0;
+    --light-color: #333;
+  }
+  
+  body {
+    color: #f5f5f5;
+  }
+  
+  .tool-section {
+    background: #2a2a2a;
+  }
+  
+  .string-btn, .tempo-btn {
+    background-color: #333;
+    color: #f5f5f5;
+  }
+  
+  .chord-selector select, .scale-selector select {
+    background-color: #333;
+    color: #f5f5f5;
+    border-color: #555;
+  }
+}
