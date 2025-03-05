@@ -57,10 +57,7 @@ class ScaleLibrary {
       this.scaleType.addEventListener('change', () => this.updateScaleDiagram());
     }
     
-    // Show debug info in development
-    document.querySelectorAll('.debug-info').forEach(div => {
-      div.style.display = 'block';
-    });
+    // Debug info is now hidden
     
     // Initialize with default scale - delay slightly to ensure DOM is ready
     setTimeout(() => this.updateScaleDiagram(), 300);

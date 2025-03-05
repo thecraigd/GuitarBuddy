@@ -99,62 +99,24 @@ class GuitarTuner {
   }
   
   addDebugElements() {
-    // Add debug elements to the tuner section
-    // Try multiple ways to find the tuner container
-    const container = document.querySelector('#tuner') || 
-                      document.querySelector('.tool-section[id="tuner"]');
-    
-    if (container) {
-      console.log('Found tuner container, adding debug elements');
-    } else {
-      console.error('Could not find tuner container to add debug elements');
-      return;
-    }
-    
-    // Create debug section if it doesn't exist
+    // Set up minimal required elements for functionality, but keep them hidden
     if (!window.debugElements) {
       window.debugElements = {};
     }
     
-    // Add a simple test button
-    const testButton = document.createElement('button');
-    testButton.textContent = 'Test Audio';
-    testButton.className = 'action-btn';
-    testButton.style.marginTop = '10px';
-    testButton.style.marginBottom = '10px';
-    testButton.style.width = 'auto';
-    testButton.style.padding = '8px 16px';
-    
-    testButton.addEventListener('click', () => {
-      tunerLog('Test audio button clicked');
-      this.testAudio();
-    });
-    
-    // Add debug output
+    // Create hidden debug output element for logging
     const debugOutput = document.createElement('pre');
-    debugOutput.style.height = '100px';
-    debugOutput.style.overflow = 'auto';
-    debugOutput.style.fontSize = '10px';
-    debugOutput.style.backgroundColor = '#f5f5f5';
-    debugOutput.style.padding = '5px';
-    debugOutput.style.border = '1px solid #ddd';
-    debugOutput.style.marginTop = '10px';
-    
+    debugOutput.style.display = 'none';
     window.debugElements.tunerOutput = debugOutput;
     
-    // Add microphone status
+    // Create hidden mic status element (needed for status updates)
     const micStatus = document.createElement('div');
     micStatus.id = 'mic-status';
-    micStatus.style.padding = '5px';
-    micStatus.style.backgroundColor = '#ffeeee';
-    micStatus.style.borderRadius = '4px';
-    micStatus.style.marginTop = '10px';
-    micStatus.textContent = 'Microphone: Not accessed yet';
+    micStatus.style.display = 'none';
     
-    // Add elements to page
-    container.appendChild(testButton);
-    container.appendChild(micStatus);
-    container.appendChild(debugOutput);
+    // Add elements to document body (hidden)
+    document.body.appendChild(debugOutput);
+    document.body.appendChild(micStatus);
   }
   
   // Test audio setup
@@ -563,47 +525,27 @@ function setupSimpleTuner() {
   const maxAttempts = 5;
   
   function initTuner() {
-    console.log(`Tuner initialization attempt ${attempts + 1}...`);
-    
+    // Find required elements
     const stringButtons = document.querySelectorAll('.string-btn');
     const noteDisplay = document.querySelector('.note-display');
     const freqDisplay = document.querySelector('.frequency-display');
     const startButton = document.getElementById('start-tuner');
-    const tunerStatus = document.getElementById('tuner-status');
-    const testButton = document.getElementById('tuner-test-sound');
     
-    // Debug what elements we found
-    console.log(`Found tuner elements: 
-      stringButtons: ${stringButtons.length}, 
-      noteDisplay: ${!!noteDisplay}, 
-      freqDisplay: ${!!freqDisplay},
-      startButton: ${!!startButton},
-      tunerStatus: ${!!tunerStatus},
-      testButton: ${!!testButton}`);
-    
+    // Check if essential elements exist
     if (!stringButtons.length || !noteDisplay || !freqDisplay) {
       attempts++;
       if (attempts < maxAttempts) {
-        console.log(`Tuner elements not found, will retry in ${attempts * 500}ms`);
         setTimeout(initTuner, attempts * 500);
         return;
       }
       console.error('Simple tuner: Required elements not found after multiple attempts');
-      if (tunerStatus) {
-        tunerStatus.textContent = 'Error: Tuner elements not found';
-        tunerStatus.style.backgroundColor = '#ffdddd';
-      }
       return;
     }
   
   let audioContext = null;
   let currentOscillator = null;
   
-  // Update the tuner status
-  if (tunerStatus) {
-    tunerStatus.textContent = 'Simple tuner initialized';
-    tunerStatus.style.backgroundColor = '#d4ffda';
-  }
+  // Simplified initialization without UI updates
   
   // Play a reference tone for a string
   function playReferenceTone(note, frequency) {
@@ -654,18 +596,12 @@ function setupSimpleTuner() {
       // Store current oscillator for stopping later
       currentOscillator = oscillator;
       
-      if (tunerStatus) {
-        tunerStatus.textContent = `Playing reference tone: ${note} at ${frequency.toFixed(2)} Hz`;
-        tunerStatus.style.backgroundColor = '#d4ffda';
-      }
+      // Status updates removed
       
       console.log(`Simple tuner playing ${note} at ${frequency} Hz`);
     } catch (error) {
       console.error('Error playing reference tone:', error);
-      if (tunerStatus) {
-        tunerStatus.textContent = 'ERROR: ' + error.message;
-        tunerStatus.style.backgroundColor = '#ffd4d4';
-      }
+      // Error updates removed
     }
   }
   
@@ -680,21 +616,15 @@ function setupSimpleTuner() {
     });
   });
   
-  // Add listener to test button if it exists
-  if (testButton) {
-    testButton.addEventListener('click', () => {
-      console.log('Test tone button clicked');
-      playReferenceTone('A4', 440);
-    });
-  }
+  // Test button functionality removed
   
   // The start listening button won't really work in this simple implementation
   // but we'll handle it to show a message
   if (startButton) {
     startButton.addEventListener('click', () => {
-      if (tunerStatus) {
-        tunerStatus.textContent = 'Microphone input not available in simple mode. Use string buttons for reference tones.';
-        tunerStatus.style.backgroundColor = '#fff3cd';
+      // Display a message in the frequency display instead of using status
+      if (freqDisplay) {
+        freqDisplay.textContent = 'Use string buttons for reference tones';
       }
       
       console.log('Microphone listening not implemented in simple mode');

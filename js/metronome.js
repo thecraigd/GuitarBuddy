@@ -95,52 +95,18 @@ class Metronome {
   }
   
   addTestButton() {
-    // Add a test button and debug output
-    // Find the container using the section id or the proper class
-    const container = document.querySelector('#metronome') || 
-                      document.querySelector('.tool-section[id="metronome"]');
-    
-    if (container) {
-      console.log('Found metronome container, adding test button');
-    } else {
-      console.error('Could not find metronome container to add test button');
-      return;
-    }
-    
-    // Create debug section if it doesn't exist
+    // Set up minimal required elements for functionality, but keep them hidden
     if (!window.debugElements) {
       window.debugElements = {};
     }
     
-    // Add a simple test sound button
-    const testButton = document.createElement('button');
-    testButton.textContent = 'Test Sound';
-    testButton.className = 'action-btn';
-    testButton.style.marginTop = '10px';
-    testButton.style.marginBottom = '10px';
-    testButton.style.width = 'auto';
-    testButton.style.padding = '8px 16px';
-    
-    testButton.addEventListener('click', () => {
-      debugLog('Test sound button clicked');
-      this.playTestSound();
-    });
-    
-    // Add debug output
+    // Create hidden debug output element for logging
     const debugOutput = document.createElement('pre');
-    debugOutput.style.height = '100px';
-    debugOutput.style.overflow = 'auto';
-    debugOutput.style.fontSize = '10px';
-    debugOutput.style.backgroundColor = '#f5f5f5';
-    debugOutput.style.padding = '5px';
-    debugOutput.style.border = '1px solid #ddd';
-    debugOutput.style.marginTop = '10px';
-    
+    debugOutput.style.display = 'none';
     window.debugElements.metronomeOutput = debugOutput;
     
-    // Add elements to page
-    container.appendChild(testButton);
-    container.appendChild(debugOutput);
+    // Add element to document body (hidden)
+    document.body.appendChild(debugOutput);
   }
   
   toggleMetronome() {
@@ -382,34 +348,21 @@ function setupSimpleMetronome() {
   const maxAttempts = 5;
   
   function initMetronome() {
-    console.log(`Metronome initialization attempt ${attempts + 1}...`);
-    
+    // Find required elements
     const startButton = document.getElementById('start-metronome');
     const tempoSlider = document.getElementById('tempo-slider');
     const tempoDisplay = document.querySelector('.tempo-display');
     const tempoUp = document.getElementById('tempo-up');
     const tempoDown = document.getElementById('tempo-down');
-    const metronomeStatus = document.getElementById('metronome-status');
     
-    // Debug what elements we found
-    console.log(`Found elements: 
-      startButton: ${!!startButton}, 
-      tempoSlider: ${!!tempoSlider}, 
-      tempoDisplay: ${!!tempoDisplay},
-      metronomeStatus: ${!!metronomeStatus}`);
-    
+    // Check if essential elements exist
     if (!startButton || !tempoSlider || !tempoDisplay) {
       attempts++;
       if (attempts < maxAttempts) {
-        console.log(`Metronome elements not found, will retry in ${attempts * 500}ms`);
         setTimeout(initMetronome, attempts * 500);
         return;
       }
       console.error('Simple metronome: Required elements not found after multiple attempts');
-      if (metronomeStatus) {
-        metronomeStatus.textContent = 'Error: Metronome elements not found';
-        metronomeStatus.style.backgroundColor = '#ffdddd';
-      }
       return;
     }
   
@@ -418,11 +371,7 @@ function setupSimpleMetronome() {
   let intervalId = null;
   let audioContext = null;
   
-  // Update the metronome status
-  if (metronomeStatus) {
-    metronomeStatus.textContent = 'Simple metronome initialized';
-    metronomeStatus.style.backgroundColor = '#d4ffda';
-  }
+  // Simplified initialization without status updates
   
   // Update tempo display
   function updateTempoDisplay() {
@@ -502,16 +451,10 @@ function setupSimpleMetronome() {
         isPlaying = true;
         startButton.textContent = 'Stop';
         
-        if (metronomeStatus) {
-          metronomeStatus.textContent = `Simple metronome playing at ${tempo} BPM`;
-          metronomeStatus.style.backgroundColor = '#d4ffda';
-        }
+        // Status updates removed
       } catch (error) {
         console.error('Error starting simple metronome:', error);
-        if (metronomeStatus) {
-          metronomeStatus.textContent = 'ERROR: ' + error.message;
-          metronomeStatus.style.backgroundColor = '#ffd4d4';
-        }
+        // Error updates removed
       }
     }
   }
@@ -529,9 +472,7 @@ function setupSimpleMetronome() {
       const interval = 60000 / tempo;
       intervalId = setInterval(playClick, interval);
       
-      if (metronomeStatus) {
-        metronomeStatus.textContent = `Simple metronome playing at ${tempo} BPM`;
-      }
+      // Status updates removed
     }
   }
   

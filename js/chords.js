@@ -85,10 +85,7 @@ class ChordLibrary {
       this.chordType.addEventListener('change', () => this.updateChordDiagram());
     }
     
-    // Show debug info in development
-    document.querySelectorAll('.debug-info').forEach(div => {
-      div.style.display = 'block';
-    });
+    // Debug info is now hidden
     
     // Initialize with default chord - delay slightly to ensure DOM is ready
     setTimeout(() => this.updateChordDiagram(), 100);
