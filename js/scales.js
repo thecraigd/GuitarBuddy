@@ -166,7 +166,7 @@ class ScaleLibrary {
     fretboard.style.maxWidth = '100%';
     
     // Number of frets to display - reduced to improve display on mobile
-    const numFrets = 12;
+    const numFrets = 8; // Reduced from 12 to 8 to match fret markers
     
     // String labels for standard tuning (from lowest to highest)
     const stringLabels = ['E', 'A', 'D', 'G', 'B', 'e'];
@@ -176,17 +176,42 @@ class ScaleLibrary {
       const stringDiv = document.createElement('div');
       stringDiv.className = 'guitar-string';
       
-      // Add string label first
-      const stringLabel = document.createElement('div');
-      stringLabel.className = 'fret string-label';
-      stringLabel.textContent = stringLabels[stringIdx];
-      stringDiv.appendChild(stringLabel);
+      // Add string label container
+      const stringLabelContainer = document.createElement('div');
+      stringLabelContainer.className = 'string-info-container';
+      stringLabelContainer.style.display = 'flex';
+      stringLabelContainer.style.flexDirection = 'column';
+      stringLabelContainer.style.alignItems = 'center';
+      stringLabelContainer.style.justifyContent = 'center';
+      stringLabelContainer.style.width = '36px';
+      stringLabelContainer.style.borderRight = '2px solid #000';
       
       // Get the open string note
       const openStringValue = this.guitarTuning[stringIdx];
       
-      // Create fret positions
-      for (let fret = 0; fret <= numFrets; fret++) {
+      // Add string identifier (E, A, D, etc.)
+      const stringIdentifier = document.createElement('div');
+      stringIdentifier.className = 'string-identifier';
+      stringIdentifier.textContent = stringLabels[stringIdx];
+      
+      // If the open note is in the scale, color it appropriately
+      if (scaleNotes.includes(openStringValue)) {
+        if (openStringValue === scaleNotes[0]) {
+          // Root note
+          stringIdentifier.style.color = 'var(--accent-color)';
+          stringIdentifier.style.fontWeight = 'bold';
+        } else {
+          // Other scale note
+          stringIdentifier.style.color = 'var(--primary-color)';
+          stringIdentifier.style.fontWeight = 'bold';
+        }
+      }
+      
+      stringLabelContainer.appendChild(stringIdentifier);
+      stringDiv.appendChild(stringLabelContainer);
+      
+      // Create fret positions (starting from fret 1, not open string)
+      for (let fret = 1; fret <= numFrets; fret++) {
         const fretDiv = document.createElement('div');
         fretDiv.className = 'fret';
         
@@ -237,10 +262,11 @@ class ScaleLibrary {
     // Empty marker for the string label column
     const emptyMarker = document.createElement('div');
     emptyMarker.className = 'fret-marker';
-    emptyMarker.style.width = '30px';
+    emptyMarker.style.width = '36px';
     fretMarkers.appendChild(emptyMarker);
     
-    for (let fret = 0; fret <= numFrets; fret++) {
+    // Add actual fret numbers (starting at 1)
+    for (let fret = 1; fret <= numFrets; fret++) {
       const markerDiv = document.createElement('div');
       markerDiv.className = 'fret-marker';
       markerDiv.style.width = '30px';
@@ -260,6 +286,7 @@ class ScaleLibrary {
     explanation.innerHTML = `
       <p>Red dots: Root notes (${root})</p>
       <p>Blue dots: Other scale notes</p>
+      <p>Colored string names: Open strings in the scale</p>
     `;
     
     this.scaleDiagram.appendChild(explanation);

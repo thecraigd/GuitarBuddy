@@ -323,7 +323,7 @@ class ChordLibrary {
     // Add string identifier column
     const stringIdMarker = document.createElement('div');
     stringIdMarker.className = 'fret-marker';
-    stringIdMarker.style.width = '30px';  // Match width of string info container
+    stringIdMarker.style.width = '36px';  // Match width of string info container
     fretMarkers.appendChild(stringIdMarker);
     
     // Add actual fret numbers
