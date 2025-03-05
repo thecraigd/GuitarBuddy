@@ -313,29 +313,6 @@ class ChordLibrary {
     
     guitarDiagram.appendChild(fretboard);
     
-    // Add fret markers below
-    const fretMarkers = document.createElement('div');
-    fretMarkers.className = 'fret-markers';
-    fretMarkers.style.display = 'flex';
-    fretMarkers.style.justifyContent = 'space-around';
-    fretMarkers.style.marginTop = '5px';
-    
-    // Add string identifier column
-    const stringIdMarker = document.createElement('div');
-    stringIdMarker.className = 'fret-marker';
-    stringIdMarker.style.width = '36px';  // Match width of string info container
-    fretMarkers.appendChild(stringIdMarker);
-    
-    // Add actual fret numbers
-    for (let j = 0; j < 4; j++) {  // Reduced to 4 frets to match the diagram
-      const markerDiv = document.createElement('div');
-      markerDiv.className = 'fret-marker';
-      markerDiv.textContent = startFret + j + 1;  // Real fret numbers (starting at 1)
-      fretMarkers.appendChild(markerDiv);
-    }
-    
-    guitarDiagram.appendChild(fretMarkers);
-    
     // Add fingering legend
     const fingerLegend = document.createElement('div');
     fingerLegend.className = 'finger-legend';

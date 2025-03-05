@@ -215,8 +215,11 @@ class ScaleLibrary {
         const fretDiv = document.createElement('div');
         fretDiv.className = 'fret';
         
-        // Make frets more compact
+        // Make frets more compact with consistent width
         fretDiv.style.width = '30px';
+        fretDiv.style.flexBasis = '30px';
+        fretDiv.style.flexShrink = '0';
+        fretDiv.style.flexGrow = '0';
         
         // Calculate note at this fret
         const noteValue = (openStringValue + fret) % 12;
@@ -255,27 +258,7 @@ class ScaleLibrary {
       fretboard.appendChild(stringDiv);
     }
     
-    // Add fret markers below
-    const fretMarkers = document.createElement('div');
-    fretMarkers.className = 'fret-markers';
-    
-    // Empty marker for the string label column
-    const emptyMarker = document.createElement('div');
-    emptyMarker.className = 'fret-marker';
-    emptyMarker.style.width = '36px';
-    fretMarkers.appendChild(emptyMarker);
-    
-    // Add actual fret numbers (starting at 1)
-    for (let fret = 1; fret <= numFrets; fret++) {
-      const markerDiv = document.createElement('div');
-      markerDiv.className = 'fret-marker';
-      markerDiv.style.width = '30px';
-      markerDiv.textContent = fret;
-      fretMarkers.appendChild(markerDiv);
-    }
-    
     diagramContainer.appendChild(fretboard);
-    diagramContainer.appendChild(fretMarkers);
     this.scaleDiagram.appendChild(diagramContainer);
     
     // Add explanation

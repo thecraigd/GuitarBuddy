@@ -427,16 +427,7 @@ h2::after {
   padding: 0 1rem;
 }
 
-.tempo-display::after {
-  content: 'BPM';
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0;
-  font-size: 0.9rem;
-  color: var(--medium-gray);
-  font-weight: var(--font-regular);
-  letter-spacing: normal;
-}
+/* BPM label removed from CSS and added to JS instead */
 
 .time-signature select {
   padding: 0.75rem 1rem;
