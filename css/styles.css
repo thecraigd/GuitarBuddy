@@ -1,11 +1,45 @@
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --accent-color: #e74c3c;
-  --dark-color: #2c3e50;
-  --light-color: #ecf0f1;
-  --background-color: #f9f9f9;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Modern color palette with rich tones */
+  --primary-color: #4361ee;
+  --primary-light: #4895ef;
+  --primary-dark: #3f37c9;
+  --secondary-color: #4cc9f0;
+  --accent-color: #f72585;
+  --success-color: #4dca93;
+  --warning-color: #ffc857;
+  --error-color: #f94144;
+  
+  /* Neutral tones */
+  --dark-color: #212435;
+  --dark-gray: #495057;
+  --medium-gray: #6c757d;
+  --light-gray: #dee2e6;
+  --light-color: #f8f9fa;
+  --background-color: #f9fafb;
+  
+  /* Effects */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  /* Font weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition: 250ms ease;
+  --transition-slow: 350ms ease;
 }
 
 * {
@@ -15,194 +49,356 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--background-color);
   color: var(--dark-color);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 .app-container {
   max-width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(180deg, var(--background-color) 0%, rgba(248, 250, 252, 0.8) 100%);
 }
 
 header {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   box-shadow: var(--shadow);
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   font-size: 1.8rem;
+  font-weight: var(--font-bold);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1::before {
+  content: "🎸";
+  margin-right: 8px;
+  font-size: 1.5rem;
 }
 
 main {
   flex: 1;
-  padding: 1rem;
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 footer {
   background-color: var(--dark-color);
   color: var(--light-color);
   text-align: center;
-  padding: 1rem;
+  padding: 1.25rem;
   font-size: 0.9rem;
+  font-weight: var(--font-light);
+  letter-spacing: 0.2px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Navigation */
 #main-nav {
   display: flex;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  padding: 3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  position: relative;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .nav-btn {
   flex: 1;
-  padding: 0.75rem 0.5rem;
+  padding: 0.8rem 0.5rem;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.2s;
-  font-size: 0.9rem;
+  font-weight: var(--font-semibold);
+  transition: all var(--transition);
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius-lg);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .nav-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
 .nav-btn.active {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: white;
+  transition: all var(--transition);
+  transform: translateX(-50%);
+  opacity: 0;
+  border-radius: var(--radius-full);
+}
+
+.nav-btn.active:after {
+  width: 30%;
+  opacity: 1;
 }
 
 /* Tool Sections */
 .tool-section {
   display: none; /* Default state is hidden */
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Glass effect card */
+.tool-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-light), var(--secondary-color));
+  z-index: 1;
 }
 
 /* Active section is visible - JavaScript will manage this */
 .tool-section.active {
   display: block !important; /* Use !important to override any inline styles */
-  animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
-  color: var(--primary-color);
+  color: var(--dark-color);
+  font-weight: var(--font-bold);
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: var(--radius-full);
 }
 
 /* Tuner */
 .tuner-display {
-  background-color: var(--light-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f5f7fa);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
+  box-shadow: var(--shadow-sm), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
 .note-display {
-  font-size: 4rem;
-  font-weight: bold;
+  font-size: 5rem;
+  font-weight: var(--font-bold);
   margin-bottom: 0.5rem;
-  height: 5rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  letter-spacing: -1px;
+  transition: all var(--transition);
+  position: relative;
 }
 
 .frequency-display {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--dark-color);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-gray);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.3px;
+  transition: all var(--transition);
 }
 
 .tuning-indicator {
-  height: 8px;
-  background-color: #ddd;
-  border-radius: 4px;
-  margin: 0 auto;
+  height: 12px;
+  background-color: var(--light-gray);
+  border-radius: var(--radius-full);
+  margin: 0 auto 2rem auto;
   position: relative;
   width: 80%;
+  box-shadow: var(--shadow-inner);
+  overflow: hidden;
+}
+
+.tuning-indicator::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background-color: var(--dark-gray);
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  z-index: 1;
 }
 
 .indicator-bar {
   position: absolute;
   height: 100%;
-  width: 4px;
+  width: 8px;
   background-color: var(--accent-color);
-  border-radius: 4px;
+  border-radius: var(--radius-full);
   left: 50%;
   transform: translateX(-50%);
-  transition: left 0.2s;
+  transition: left 0.2s ease-out;
+  box-shadow: 0 0 8px rgba(247, 37, 133, 0.5);
 }
 
 .string-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 1.5rem;
+  gap: 12px;
+  margin-bottom: 2rem;
 }
 
 .string-btn {
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.75rem;
   background-color: var(--light-color);
-  border: none;
-  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all var(--transition);
+  font-weight: var(--font-medium);
+  color: var(--dark-gray);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.string-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity var(--transition);
 }
 
 .string-btn:hover {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: rgba(67, 97, 238, 0.1);
+}
+
+.string-btn:hover::before {
+  opacity: 1;
+}
+
+.string-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .action-btn {
   display: block;
   width: 100%;
-  padding: 1rem;
-  background-color: var(--primary-color);
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius);
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: var(--font-semibold);
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  opacity: 0;
+  transition: opacity var(--transition);
 }
 
 .action-btn:hover {
-  background-color: #2980b9;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(67, 97, 238, 0.35);
+}
+
+.action-btn:hover::before {
+  opacity: 1;
 }
 
 .action-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.2);
 }
 
 /* Metronome */
@@ -210,44 +406,131 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--light-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f5f7fa);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
 .tempo-display {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3.2rem;
+  font-weight: var(--font-bold);
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  letter-spacing: -1px;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.tempo-display::after {
+  content: 'BPM';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0;
+  font-size: 0.9rem;
+  color: var(--medium-gray);
+  font-weight: var(--font-regular);
+  letter-spacing: normal;
 }
 
 .time-signature select {
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--light-gray);
   font-size: 1rem;
+  font-family: inherit;
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--dark-gray);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+.time-signature select:hover {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
 }
 
 #tempo-slider {
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin: 2rem 0;
   height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--light-gray);
+  border-radius: var(--radius-full);
+  outline: none;
+  box-shadow: var(--shadow-inner);
+  overflow: hidden;
+}
+
+#tempo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), -340px 0 0 320px var(--primary-light);
+  border: 2px solid white;
+}
+
+#tempo-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
 }
 
 .metronome-controls {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .tempo-btn {
   padding: 1rem;
-  background-color: var(--light-color);
-  border: none;
-  border-radius: 8px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius);
   font-size: 1.5rem;
   cursor: pointer;
   flex: 1;
   width: 20%;
+  transition: all var(--transition);
+  color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tempo-btn:hover {
+  background-color: var(--primary-light);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.tempo-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 #start-metronome {
@@ -259,84 +542,317 @@ h2 {
 .chord-selector, .scale-selector {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .chord-selector select, .scale-selector select {
   flex: 1;
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--light-gray);
   font-size: 1rem;
+  font-family: inherit;
+  background-color: white;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--dark-gray);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c757d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+.chord-selector select:hover, .scale-selector select:hover {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+}
+
+.chord-selector select:focus, .scale-selector select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
 
 .chord-diagram, .scale-diagram {
-  background-color: var(--light-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  min-height: 250px;
+  background: linear-gradient(145deg, #ffffff, #f5f7fa);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  justify-content: flex-start;
+  box-shadow: var(--shadow), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all var(--transition);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
 .chord-diagram h3, .scale-diagram h3 {
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+  font-size: 1.8rem;
+  font-weight: var(--font-bold);
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+.chord-diagram h3::after, .scale-diagram h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: var(--radius-full);
+  opacity: 0.7;
 }
 
 /* Special styles for scale diagram */
 .scale-diagram .diagram-container {
   max-width: 100%;
   overflow-x: auto;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  scrollbar-width: thin;
+  scrollbar-color: var(--light-gray) transparent;
+}
+
+.scale-diagram .diagram-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scale-diagram .diagram-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scale-diagram .diagram-container::-webkit-scrollbar-thumb {
+  background-color: var(--light-gray);
+  border-radius: var(--radius-full);
 }
 
 .scale-diagram .fretboard {
   width: fit-content;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .scale-diagram .fret {
-  min-width: 30px;
-  width: 30px;
+  min-width: 34px;
+  width: 34px;
+  height: 36px;
+  border-right: 1px solid var(--light-gray);
+  position: relative;
+  transition: background-color var(--transition-fast);
+}
+
+.scale-diagram .fret:hover {
+  background-color: rgba(76, 201, 240, 0.05);
 }
 
 .scale-diagram .finger-marker {
-  font-size: 10px;
-  width: 22px;
-  height: 22px;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: var(--font-semibold);
+}
+
+.scale-diagram .finger-marker.root-marker {
+  background: linear-gradient(135deg, var(--accent-color), #b5179e) !important;
+  box-shadow: 0 2px 8px rgba(247, 37, 133, 0.3);
+  color: white;
 }
 
 .scale-diagram .scale-notes {
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.75rem;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  color: var(--dark-gray);
+  font-weight: var(--font-medium);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .scale-diagram .scale-explanation {
-  margin-top: 1rem;
-  font-size: 0.85rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
   text-align: center;
-  color: #666;
+  color: var(--medium-gray);
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
 }
 
-/* Mobile optimizations */
-@media (max-width: 600px) {
+.scale-diagram .scale-explanation p {
+  position: relative;
+  padding-left: 18px;
+}
+
+.scale-diagram .scale-explanation p:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), #b5179e);
+}
+
+.scale-diagram .scale-explanation p:last-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+/* Place this section at the end of the file */
+/* Mobile and responsive optimizations */
+@media (max-width: 768px) {
+  main {
+    padding: 1.25rem;
+  }
+  
+  .tool-section {
+    padding: 1.5rem;
+  }
+  
+  .tuner-display, .metronome-display {
+    padding: 1.5rem;
+  }
+  
+  .chord-diagram, .scale-diagram {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
   header {
-    padding: 0.75rem;
+    padding: 1.25rem 1rem;
   }
   
   h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  
+  h1::before {
+    font-size: 1.3rem;
   }
   
   .nav-btn {
-    padding: 0.5rem 0.25rem;
+    padding: 0.7rem 0.25rem;
+    font-size: 0.85rem;
+  }
+  
+  .nav-btn.active:after {
+    width: 20px;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+  
+  .tool-section {
+    padding: 1.25rem;
+    margin-top: 1rem;
+    border-radius: var(--radius);
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tuner-display, .metronome-display {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .note-display {
+    font-size: 4rem;
+    height: 5rem;
+  }
+  
+  .frequency-display {
+    font-size: 1.1rem;
+  }
+  
+  .string-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .string-btn {
+    padding: 0.85rem 0.5rem;
+  }
+  
+  .metronome-display {
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  
+  .tempo-display {
+    font-size: 2.8rem;
+    text-align: center;
+  }
+  
+  #tempo-slider {
+    margin: 1.5rem 0;
+  }
+  
+  .chord-selector, .scale-selector {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .chord-diagram h3, .scale-diagram h3 {
+    font-size: 1.5rem;
+  }
+  
+  .action-btn {
+    padding: 0.9rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+  
+  .nav-btn {
+    padding: 0.65rem 0.15rem;
     font-size: 0.8rem;
   }
   
@@ -345,25 +861,36 @@ h2 {
   }
   
   .note-display {
-    font-size: 3rem;
+    font-size: 3.5rem;
+    height: 4rem;
   }
   
-  .string-buttons {
-    grid-template-columns: repeat(2, 1fr);
+  .tuner-display, .metronome-display {
+    padding: 1rem;
   }
   
-  .metronome-display {
-    flex-direction: column;
-    gap: 1rem;
+  .chord-diagram, .scale-diagram {
+    padding: 1rem;
   }
   
-  .chord-selector, .scale-selector {
+  .tempo-display {
+    font-size: 2.5rem;
+  }
+  
+  .metronome-controls {
+    gap: 8px;
+  }
+  
+  .tempo-btn {
+    padding: 0.8rem;
+  }
+  
+  .scale-diagram .scale-explanation {
     flex-direction: column;
     gap: 0.5rem;
+    align-items: flex-start;
   }
 }
-
-/* Guitar diagram related styles */
 .guitar-diagram {
   display: flex;
   flex-direction: column;
@@ -428,81 +955,219 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-right: 2px solid #000; /* Nut border */
-  background-color: #f9f9f9;
-  padding: 2px 0;
+  border-right: 2px solid var(--dark-color); /* Nut border */
+  background-color: #f9fafb;
+  padding: 3px 0;
+  width: 36px;
+  position: relative;
+}
+
+.string-info-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
 }
 
 .string-identifier {
-  font-size: 10px;
-  color: #888;
+  font-size: 11px;
+  color: var(--dark-gray);
+  font-weight: var(--font-medium);
   text-align: center;
+  letter-spacing: -0.5px;
 }
 
 .open-string-indicator {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: var(--font-bold);
   text-align: center;
+  position: relative;
+  margin-top: 3px;
 }
 
 .fret-markers {
   display: flex;
   justify-content: space-around;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.25rem 0;
+  background-color: var(--light-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .fret-marker {
   width: 40px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--dark-gray);
+  font-weight: var(--font-medium);
 }
 
 /* Special chord diagram styles */
 .chord-diagram .fretboard {
-  border-top: 4px solid #000; /* Thick line for the nut */
+  border-top: 4px solid var(--dark-color); /* Thick line for the nut */
+  margin: 1rem 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--light-gray);
+  background-color: white;
+}
+
+.chord-diagram .guitar-string {
+  border-bottom: 1px solid var(--light-gray);
+  height: 38px;
+}
+
+.chord-diagram .fret {
+  border-right: 1px solid var(--light-gray);
+  transition: background-color var(--transition-fast);
+}
+
+.chord-diagram .fret:hover {
+  background-color: rgba(76, 201, 240, 0.05);
+}
+
+.chord-diagram .finger-marker {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .chord-diagram .finger-legend {
-  margin-top: 10px;
-  font-size: 0.8rem;
-  color: #666;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--medium-gray);
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .chord-diagram .fret-number-indicator {
   position: absolute;
-  left: -25px;
-  top: 5px;
+  left: -35px;
+  top: 10px;
   font-size: 12px;
-  padding: 2px 5px;
-  background-color: #fff;
-  border: 1px solid #888;
-  border-radius: 4px;
+  padding: 3px 6px;
+  background-color: white;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  color: var(--dark-gray);
+  font-weight: var(--font-medium);
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #1a1a1a;
+    /* Dark mode color overrides */
+    --background-color: #10162f;
     --dark-color: #e0e0e0;
-    --light-color: #333;
+    --dark-gray: #bdc3c7;
+    --medium-gray: #a0aec0;
+    --light-gray: #2d3748;
+    --light-color: #1a202c;
+    
+    /* Shadow adjustments for dark mode */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   body {
-    color: #f5f5f5;
+    color: #f5f7fa;
+    background: linear-gradient(180deg, var(--background-color) 0%, #0a0f22 100%);
+  }
+  
+  .app-container {
+    background: none;
   }
   
   .tool-section {
-    background: #2a2a2a;
+    background: linear-gradient(145deg, #1a202c, #151c2c);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .tool-section::before {
+    opacity: 0.8;
+  }
+  
+  .tuner-display, .metronome-display, .chord-diagram, .scale-diagram {
+    background: linear-gradient(145deg, #1a202c, #151c2c);
+    border-color: rgba(255, 255, 255, 0.05);
   }
   
   .string-btn, .tempo-btn {
-    background-color: #333;
-    color: #f5f5f5;
+    background-color: var(--light-color);
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.05);
   }
   
-  .chord-selector select, .scale-selector select {
-    background-color: #333;
-    color: #f5f5f5;
-    border-color: #555;
+  .string-btn:hover, .tempo-btn:hover {
+    background-color: rgba(67, 97, 238, 0.2);
+    color: white;
+    border-color: rgba(67, 97, 238, 0.3);
+  }
+  
+  .chord-selector select, .scale-selector select, .time-signature select {
+    background-color: var(--light-color);
+    color: #e2e8f0;
+    border-color: rgba(255, 255, 255, 0.1);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  }
+  
+  .chord-selector select:hover, .scale-selector select:hover, .time-signature select:hover {
+    border-color: rgba(67, 97, 238, 0.5);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+  }
+  
+  .scale-diagram .diagram-container, .scale-diagram .scale-notes, 
+  .fret-markers, .chord-diagram .fretboard {
+    background-color: var(--light-color);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .scale-diagram .fretboard, .chord-diagram .fretboard {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .scale-diagram .fret, .chord-diagram .fret {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .scale-diagram .fret:hover, .chord-diagram .fret:hover {
+    background-color: rgba(76, 201, 240, 0.1);
+  }
+  
+  .guitar-string {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .string-info-container {
+    background-color: var(--light-color);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .string-identifier {
+    color: var(--medium-gray);
+  }
+  
+  #tempo-slider {
+    background: var(--light-gray);
+  }
+  
+  #tempo-slider::-webkit-slider-thumb {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3), -340px 0 0 320px rgba(76, 201, 240, 0.4);
+  }
+  
+  .chord-diagram .finger-legend, .scale-diagram .scale-explanation {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
   }
 }

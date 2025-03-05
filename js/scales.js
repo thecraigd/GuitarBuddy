@@ -203,7 +203,8 @@ class ScaleLibrary {
           
           // Highlight the root notes
           if (noteValue === scaleNotes[0]) {
-            noteMarker.style.backgroundColor = '#e74c3c'; // Accent color for root notes
+            noteMarker.style.background = 'linear-gradient(135deg, var(--accent-color), #b5179e)';
+            noteMarker.classList.add('root-marker');
           }
           
           // Get the note name
