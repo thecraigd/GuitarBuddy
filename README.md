@@ -1,3 +1,8 @@
+[![CraigDoesData][logo]][link]
+
+[logo]: https://github.com/thecraigd/Python_SQL/raw/master/img/logo.png
+[link]: https://www.craigdoesdata.com/
+
 # GuitarBuddy - Mobile Web App for Musicians
 
 GuitarBuddy is a mobile-optimized progressive web application designed to help guitarists and other musicians with essential tools for practice, learning, and performance.
