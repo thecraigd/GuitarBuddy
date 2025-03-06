@@ -72,4 +72,4 @@ The app uses service workers to enable offline functionality. Once loaded, you c
 
 Created by Craig Dickson # GuitarBuddy
 
-[craigdoesdata.com](htts://www.craigdoesdata.com)
+[craigdoesdata.com](https://www.craigdoesdata.com)
