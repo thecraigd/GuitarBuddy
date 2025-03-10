@@ -5,7 +5,7 @@
 
 # GuitarBuddy - Mobile Web App for Musicians
 
-GuitarBuddy is a mobile-optimized progressive web application designed to help guitarists and other musicians with essential tools for practice, learning, and performance.
+[GuitarBuddy](https://guitarbuddy.netlify.app) is a mobile-optimized progressive web application designed to help guitarists and other musicians with essential tools for practice, learning, and performance.
 
 ## Features
 
